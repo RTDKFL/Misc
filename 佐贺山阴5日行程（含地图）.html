@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佐贺·北九州·山阴 5日自驾 · 完整行程</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Hiragino Sans", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+    background: #f4f1ea; color: #2b2b28; line-height: 1.6;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 20px 16px 80px; }
+  header.top { text-align: center; padding: 10px 0 20px; }
+  header.top h1 { font-size: 26px; letter-spacing: 1px; color: #3a3a34; }
+  header.top .sub { color: #8a8272; font-size: 14px; margin-top: 6px; }
+
+  nav.jump {
+    position: sticky; top: 0; z-index: 20; background: rgba(244,241,234,.95);
+    backdrop-filter: blur(6px); border-bottom: 1px solid #d8cfbc;
+    display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+    padding: 10px 8px; margin-bottom: 22px;
+  }
+  nav.jump a {
+    font-size: 13px; text-decoration: none; color: #b5502a; border: 1px solid #e0c9ba;
+    padding: 4px 11px; border-radius: 20px; background: #fff; white-space: nowrap;
+  }
+  nav.jump a:hover { background: #b5502a; color: #fff; }
+
+  .note {
+    background: #fff8e8; border: 1px solid #e8d9a8; border-radius: 10px;
+    padding: 12px 16px; font-size: 13px; color: #7a6a3a; margin-bottom: 24px;
+  }
+  h2.sec { font-size: 16px; color: #3a3a34; margin: 26px 0 12px; padding-left: 10px; border-left: 4px solid #b5502a; }
+
+  table.grid { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; font-size: 13.5px; box-shadow: 0 1px 6px rgba(90,80,50,.06); margin-bottom: 8px; }
+  table.grid th { background: #efe7d6; color: #6b5f45; font-weight: 600; text-align: left; padding: 8px 10px; font-size: 12.5px; }
+  table.grid td { padding: 8px 10px; border-top: 1px solid #f0ebdd; vertical-align: top; }
+  table.grid tr:hover td { background: #fdfbf5; }
+
+  .day { background: #fff; border: 1px solid #e3ddce; border-radius: 16px; padding: 20px; margin-bottom: 26px; box-shadow: 0 2px 10px rgba(90,80,50,.06); scroll-margin-top: 60px; }
+  .day h2 { font-size: 20px; color: #b5502a; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .day h2 .tag { background: #b5502a; color: #fff; font-size: 12px; padding: 2px 10px; border-radius: 20px; font-weight: normal; }
+  .day .idea { font-size: 13px; color: #7a7565; margin: 8px 0 14px; background: #f7f4ec; border-radius: 8px; padding: 10px 12px; }
+
+  .mapbox { position: relative; width: 100%; height: 340px; border-radius: 12px; overflow: hidden; border: 1px solid #ddd6c6; background: #eee; margin-bottom: 4px; }
+  .mapbox iframe { width: 100%; height: 100%; border: 0; }
+  a.btn-open { display: inline-flex; align-items: center; gap: 8px; margin: 12px 0 16px; padding: 9px 16px; border-radius: 10px; background: #2f7d4f; color: #fff; text-decoration: none; font-size: 13.5px; font-weight: 600; }
+  a.btn-open:hover { background: #276a43; }
+
+  table.tl td.t { white-space: nowrap; color: #444; font-variant-numeric: tabular-nums; width: 108px; font-weight: 600; }
+  table.tl tr.dr td { color: #6b8f9e; background: #f7fafb; font-size: 12.5px; }
+  table.tl tr.dr:hover td { background: #eef5f7; }
+  .sight { color: #b5502a; font-weight: 600; }
+  .hotelrow td { background: #f3f8f4 !important; }
+  .hotelrow .sight { color: #2f7d4f; }
+  .warn { background: #fdf1ec; border: 1px solid #f0cdbe; border-radius: 8px; padding: 10px 12px; font-size: 12.5px; color: #9a5236; margin: 6px 0 2px; }
+
+  ul.chk { list-style: none; background: #fff; border: 1px solid #e3ddce; border-radius: 12px; padding: 8px 6px; }
+  ul.chk li { display: flex; gap: 10px; padding: 8px 10px; border-top: 1px solid #f0ebdd; font-size: 13.5px; align-items: flex-start; }
+  ul.chk li:first-child { border-top: 0; }
+  ul.chk input { margin-top: 4px; width: 16px; height: 16px; accent-color: #b5502a; flex-shrink: 0; }
+  ul.chk label { cursor: pointer; }
+  ul.chk input:checked + label { color: #a89f8c; text-decoration: line-through; }
+
+  .kv { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; font-size: 13.5px; box-shadow: 0 1px 6px rgba(90,80,50,.06); }
+  .kv td { padding: 8px 12px; border-top: 1px solid #f0ebdd; vertical-align: top; }
+  .kv td:first-child { background: #efe7d6; color: #6b5f45; font-weight: 600; width: 130px; white-space: nowrap; }
+  footer { text-align: center; color: #a89f8c; font-size: 12px; margin-top: 26px; }
+  .drivebox { background:#fff; border:1px solid #e3ddce; border-radius:12px; padding:14px 16px; font-size:13.5px; }
+  .drivebox b{color:#b5502a;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>佐贺 · 北九州 · 山阴 · 5日自驾</h1>
+    <div class="sub">2026/11 下旬（感恩节附近）· 西→东单向 · 终点鸟取搭 スーパーはくと 回大阪</div>
+  </header>
+
+  <nav class="jump">
+    <a href="#overview">总览</a>
+    <a href="#d1">Day1</a><a href="#d2">Day2</a><a href="#d3">Day3</a>
+    <a href="#d4">Day4·5</a>
+    <a href="#drive">驾驶/限速</a>
+    <a href="#check">行前清单</a>
+  </nav>
+
+  <div class="note">
+    🌐 地图需联网、请用浏览器打开。每天可看嵌入地图；点绿色按钮跳转当天导航；表中 <span style="color:#6b8f9e">蓝色行</span> 为开车段(🚗)。行前清单可勾选，进度自动保存在本机。
+  </div>
+
+  <!-- 总览 -->
+  <h2 class="sec" id="overview">行程总览</h2>
+  <table class="grid">
+    <tr><th>日</th><th>主要区域</th><th>住宿</th><th>交通</th></tr>
+    <tr><td>Day 1</td><td>福冈高达→吉野ヶ里→武雄→祐徳稲荷</td><td>Fairfield 佐賀嬉野温泉</td><td>春秋 9C6609（福冈机场取车）</td></tr>
+    <tr><td>Day 2</td><td>唐津城→鏡山→名護屋→呼子半岛</td><td>Four Points Flex 福岡博多</td><td>自驾，唐津駅前店还车→JR筑肥線进博多</td></tr>
+    <tr><td>Day 3</td><td>出云→松江→江岛大桥→蒜山</td><td>Fairfield 岡山蒜山高原</td><td>JAL3551 福冈07:15→出云08:25，出云空港取车</td></tr>
+    <tr><td>Day 4</td><td>蒜山→三徳山投入堂→柯南小镇→鸟取砂丘</td><td>東横INN鳥取駅北口（暂定）</td><td>自驾</td></tr>
+    <tr><td>Day 5</td><td>鸟取市区弹性缓冲</td><td>—</td><td>鳥取駅还车，スーパーはくと12号 15:12→大阪</td></tr>
+  </table>
+
+  <h2 class="sec">基本信息</h2>
+  <table class="kv">
+    <tr><td>去程航班</td><td>春秋航空 9C6609　上海浦东 PVG 07:45 → 福冈 FUK 10:55</td></tr>
+    <tr><td>九州段租车</td><td>福冈机场取车 → <b>Day2 トヨタ唐津駅前店还车</b>（加满油）→ 换 JR筑肥線进博多</td></tr>
+    <tr><td>唐津→博多</td><td>JR筑肥線 唐津駅→博多，约 70–80 分钟、¥1,140 左右（多直通福冈地铁空港線，部分姪浜/筑前前原换乘）</td></tr>
+    <tr><td>山阴段租车</td><td>出雲縁結び空港 取车 → Day5 鳥取駅 附近还车（单程异地还车，需确认手续费+雪胎）</td></tr>
+    <tr><td>驾照</td><td>✅ 持日本驾照，直接可租可开</td></tr>
+    <tr><td>出行时段</td><td>感恩节附近（2026/11 下旬）——山阴日落约 17:00，白天短，行程按短日照排序</td></tr>
+  </table>
+
+  <div id="days"></div>
+
+  <!-- 驾驶/限速/冬季 -->
+  <h2 class="sec" id="drive">🚗 驾驶 · 限速 · 冬季路况</h2>
+  <div class="warn" style="font-size:13px;">
+    <b>❄️ 山阴段冬季路况 / 雪胎（重要）</b><br>
+    11月下旬山阴内陆已进初雪期，蒜山高原(~500m)、米子道(翻中国山地)、大山周边、三徳山山路都可能积雪结冰。
+    <ul style="margin:6px 0 0 18px;">
+      <li><b>雪胎(スタッドレス)必须确认</b>：向出云租车店明确要求，取车当面查轮胎+是否带雪链。</li>
+      <li>重点雪路段：米子道(蒜山IC↔湯原/落合)、蒜山各县道、三徳山登山口；遇雪减速、拉大车距、缓刹、忌急打方向。</li>
+      <li>出发前查 JARTIC / NEXCO西日本 路况 + 当天天气(山阴易突发雪飑)；大雪时米子道可能封闭。</li>
+      <li>清晨山区防<b>黑冰</b>(桥面、隧道口、背阴弯道)，从蒜山出发那段尤其小心。</li>
+    </ul>
+  </div>
+  <p style="font-size:12.5px;color:#7a6a3a;margin:12px 0 8px;">🚦 <b>沿途高速限速（以现场路牌为准，乘用车）</b>　原则：高速标准 100 km/h；山区暫定2車線常 70；都市高速 60–80；一般国道 50–60、市区 40。</p>
+  <table class="grid">
+    <tr><th>路线</th><th>大致限速</th><th>备注</th></tr>
+    <tr><td>福岡都市高速</td><td>60–80</td><td>进出福冈市区</td></tr>
+    <tr><td>九州道 / 長崎道</td><td>100</td><td>主干高速</td></tr>
+    <tr><td>西九州道（唐津方面，部分无料）</td><td>70–80</td><td>通唐津/呼子</td></tr>
+    <tr><td>山陰道（出云〜松江〜米子，多无料）</td><td>多 70</td><td>⚠️多为暫定2車線·对面通行，严禁越线超车</td></tr>
+    <tr><td>米子道（米子〜蒜山〜落合，翻山）</td><td>80（部分更低）</td><td>弯道多、冬季易雪</td></tr>
+    <tr><td>鳥取道（智頭〜鳥取，部分无料）</td><td>70–80</td><td>亦有对面通行段</td></tr>
+  </table>
+  <div class="warn" style="margin-top:8px;">⚠️ <b>山阴高速最大特点</b>：大量路段是免费的「暫定2車線」对面通行——看着像高速、其实上下行仅靠中央软柱分隔。<b>按限速、勿超车、警惕对向车与前车突然减速</b>，这是山阴自驾比雪更常见的事故风险。</div>
+
+  <h2 class="sec">全程驾驶量参考</h2>
+  <div class="drivebox">
+    <b>九州段</b>　Day1 ~130km / <b>2h55</b>（无长途）　·　Day2 ~130km / <b>2h50</b>（唐津駅还车转筑肥線，免市区驾驶）<br>
+    <b>山阴段</b>　Day3 ~130km / ~2.5h　·　Day4 ~120km / ~2.5h　·　Day5 市内短驶+还车（投入堂改Day5则往返三徳山 +100km）
+  </div>
+
+  <!-- 行前清单 -->
+  <h2 class="sec" id="check">行前清单</h2>
+  <ul class="chk" id="checklist">
+    <li><input type="checkbox" id="c0"><label for="c0"><b>两段租车分别预订</b>：九州段 福冈机场取/唐津駅前店还；山阴段 出云空港取/鳥取駅还（单程异地费需确认）；均加 ETC+中文导航</label></li>
+    <li><input type="checkbox" id="c1"><label for="c1"><b>山阴段确认雪胎(スタッドレス)</b>：预订备注、取车当面查轮胎+雪链；出发前查 JARTIC/NEXCO 路况天气</label></li>
+    <li><input type="checkbox" id="c2"><label for="c2"><b>JR筑肥線 唐津→博多</b> 当日时刻/末班核对（呼子~14:30→唐津还车~15:25→赶下一班）</label></li>
+    <li><input type="checkbox" id="c3"><label for="c3">确认 ららぽーと高达 当日演出时刻（Day1 白天看，官网）</label></li>
+    <li><input type="checkbox" id="c4"><label for="c4"><b>名護屋城博物館周一休馆</b> → 核对 Day2 是否落在周一（逢周一只看室外遗址）</label></li>
+    <li><input type="checkbox" id="c5"><label for="c5"><b>三徳山投入堂</b>：是否开山(近冬季闭山)+天气+需2人以上+登山鞋；按天气决定放 Day4 或 Day5</label></li>
+    <li><input type="checkbox" id="c6"><label for="c6">青山剛昌ふるさと館（柯南小镇）营业/休馆确认（约9:30–17:30）</label></li>
+    <li><input type="checkbox" id="c7"><label for="c7"><b>スーパーはくと12号</b> 15:12 发车按当日时刻核对，预留还车缓冲</label></li>
+    <li><input type="checkbox" id="c8"><label for="c8">嬉野 Fairfield 温泉设施以预订页为准；吉野ヶ里开园日确认</label></li>
+    <li><input type="checkbox" id="c9"><label for="c9"><b>Day4 住宿订 東横INN鳥取駅北口</b>（暂定）</label></li>
+    <li><input type="checkbox" id="c10"><label for="c10">JAL3551 早班机：前一晚早睡、留退房赶车时间；导航用电话番号/Mapcode 更准</label></li>
+  </ul>
+
+  <footer>时间为大致估算 · 投入堂按天气机动 · 地图与限速仅供参考，以当日导航与现场路牌为准</footer>
+</div>
+
+<script>
+const days = [
+  { n:1, id:"d1", tag:"高达→吉野ヶ里→武雄→祐徳→嬉野",
+    idea:"抵达日走轻松路线：出机场由近及远、一路向西南，无长途、最长单段仅约50分钟。把最费力的唐津半岛留给精力满格的次日。",
+    stops:["福岡空港","ららぽーと福岡","吉野ヶ里歴史公園","武雄神社","祐徳稲荷神社","嬉野温泉"],
+    rows:[
+      ["10:55","抵达福冈机场国际线","入境高峰预留 1~1.5h"],
+      ["~12:15","机场取车","预约トヨタ(Day2唐津駅前店还)；确认ETC"],
+      ["dr|12:15–12:30","🚗 驾车 → ららぽーと福岡（约15分，机场旁）",""],
+      ["12:30–14:00","s|ららぽーと福岡：RX-93ff ν高达 + 午餐","白天定时演出先查时刻；美食广场午餐、逛街买手办"],
+      ["dr|14:00–14:50","🚗 驾车 → 吉野ヶ里（九州道约50分）",""],
+      ["14:50–16:20","s|吉野ヶ里歴史公園","¥460；17:00闭园(入园截止16:00)，赶天亮参观"],
+      ["dr|16:20–17:10","🚗 驾车 → 武雄（长崎道约50分）",""],
+      ["17:10–17:45","s|武雄温泉 楼門 + 武雄神社","楼門夜有点灯；⚠️大楠天黑基本看不清"],
+      ["dr|17:45–18:15","🚗 驾车 → 祐徳稲荷（约30分）",""],
+      ["18:15–18:50","s|祐徳稲荷神社","三大稲荷；夜间有点灯；电梯¥300"],
+      ["dr|18:50–19:20","🚗 驾车 → 嬉野温泉入住（约30分）","晚餐酒店/温泉街，汤豆腐名物"],
+    ],
+    warn:"⚠️ 武雄大楠的取舍：本版把唐津半岛让给 Day2，代价是武雄、祐徳落在天黑后。祐徳有夜间点灯不亏；但武雄神社大楠(3000年樟树)天黑看不到。很在意的话可压缩吉野ヶ里、把武雄提前到~16:20勉强赶余光——整体接受略过更省心。" },
+
+  { n:2, id:"d2", tag:"唐津城→鏡山→名護屋→呼子→筑肥線进博多",
+    idea:"精力满格的一天，上午北上攻唐津半岛。由近及远：唐津城→鏡山→名護屋→最远的呼子；末站呼子玩完就近到唐津駅还车，换 JR筑肥線 轻松进博多——省掉90分钟市区长途，当晚早休赶 Day3 早班机。全天自驾仅约 2h50。",
+    stops:["唐津城","鏡山展望台 唐津","名護屋城跡","田島神社 唐津市","唐津駅","博多駅"],
+    rows:[
+      ["~8:30","酒店早餐后退房出发",""],
+      ["dr|8:30–9:30","🚗 驾车 → 唐津城（约60分）",""],
+      ["9:30–10:10","s|唐津城（仅外观）","不进天守，舞鶴橋拍天守+海景(白天)"],
+      ["dr|10:10–10:30","🚗 驾车 → 鏡山展望台（约20分）",""],
+      ["10:30–11:00","s|鏡山展望台","俯瞰虹の松原与唐津湾全景；盘山路"],
+      ["dr|11:00–11:45","🚗 驾车 → 名護屋城（约45分）",""],
+      ["11:45–13:00","s|名護屋城跡 + 名護屋城博物館","丰臣秀吉侵朝大本营；博物馆免费、⚠️周一休"],
+      ["dr|13:00–13:15","🚗 驾车 → 呼子·加部島（约15分）",""],
+      ["13:15–14:30","s|呼子 午餐 + 田島神社 磯鳥居","加部島海边鸟居；活鱿鱼(排队)或连锁快餐从简"],
+      ["dr|14:30–15:00","🚗 驾车 → 唐津駅（约30分，途中加满油）",""],
+      ["15:00–15:25","s|トヨタレンタカー 唐津駅前店 还车","核对时间；确认异地还车手续"],
+      ["15:30–16:50","🚄 JR筑肥線 唐津駅 → 博多","~70–80分/¥1,140；多直通空港線，按当日时刻核对"],
+      ["傍晚起","h|入住 Four Points Flex by Sheraton 福岡博多","博多站旁步行可达；博多拉面/屋台；早休赶07:15航班"],
+    ],
+    warn:"本天把「看夜间点灯」换成「轻松早收 + 免市区驾驶」，更利于隔天赶早机。唐津城/高达因此都是白天看、无点灯——已知取舍。大川内山本次舍弃。" },
+
+  { n:3, id:"d3", tag:"出云→松江→江岛大桥→蒜山",
+    idea:"清早飞出云，落地即租车。从最西的出云开始，沿山阴一路向东：出云大社→松江城→江岛大桥，傍晚上高原入住蒜山。全程单向东进。",
+    stops:["出雲縁結び空港","稲佐の浜","出雲大社","松江城","江島大橋","フェアフィールド・バイ・マリオット・岡山蒜山高原"],
+    rows:[
+      ["07:15→08:25","✈ JAL 3551 福岡 → 出雲","需提前退房赶早班机（博多→机场地铁约6分）"],
+      ["08:50","出雲縁結び空港 取车","确认单程还车(鳥取駅)+雪胎+ETC"],
+      ["dr|08:50–09:10","🚗 驾车 → 稲佐の浜（约20分）",""],
+      ["09:10–09:35","s|稲佐の浜","弁天島鸟居、「国譲り」神话之滨（今日上午来，人少清净）"],
+      ["dr|09:35–09:40","🚗 驾车 → 出雲大社（约5分）",""],
+      ["09:40–11:15","s|出雲大社","日本第一结缘神社，神楽殿大注连绳；门前ぜんざい/出雲そば"],
+      ["dr|11:15–12:05","🚗 驾车 → 松江（山阴道约45–50分）",""],
+      ["12:05–13:00","松江 午餐 出雲そば",""],
+      ["13:00–14:15","s|松江城","现存12天守之一(国宝黑天守)；可加堀川游船(50分,追加)"],
+      ["dr|14:15–14:45","🚗 驾车 → 江島大橋（约30分）",""],
+      ["14:45–15:15","s|江島大橋（ベタ踏み坂）","网红陡桥，从大根島/境港侧仰拍最陡"],
+      ["dr|15:15–16:30","🚗 驾车 → 蒜山高原入住（米子道约1h15）",""],
+      ["晚","h|蒜山高原 · Fairfield 岡山蒜山高原","ジャージーランド乳制品；高原星空；蒜山焼きそば"],
+    ],
+    warn:"⚠️ 稲佐の浜日落是山阴名景，但单向东进只能上午来；为它改傍晚会打乱住蒜山节奏，不建议。" },
+
+  { n:4, id:"d4", tag:"蒜山→三徳山→柯南小镇→砂丘 ·（弹性两天）",
+    idea:"Day4 住鸟取站附近后，Day4/5 是同一大鸟取区域、按天气机动——尤其三徳山投入堂看老天脸色，哪天天气好路面干就哪天去(首选Day4上午顺路)。下为「Day4天气好」标准版 + Day5弹性。",
+    stops:["フェアフィールド・バイ・マリオット・岡山蒜山高原","三徳山三佛寺","三朝温泉","青山剛昌ふるさと館","鳥取砂丘","東横イン鳥取駅北口"],
+    rows:[
+      ["【Day4 标准版：天气好，投入堂顺路拿下】","",""],
+      ["~8:30","退房蒜山，向东出发","蒜山三山晨景/买乳制品早餐"],
+      ["dr|8:30–9:30","🚗 驾车 → 三徳山三佛寺（约1h）",""],
+      ["9:30–11:30","s|三徳山三佛寺 投入堂 登山参拝","⚠️近冬季闭山+需2人以上+登山鞋；往返1.5–2h，陡峭手脚并用"],
+      ["dr|11:30–11:45","🚗 驾车 → 三朝温泉（约15分）",""],
+      ["11:45–12:45","s|三朝温泉 午餐+足汤","世界罕见含放射能温泉，河畔免费足汤，登完山正好泡"],
+      ["dr|12:45–13:15","🚗 驾车 → 柯南小镇 北栄町（约40分）",""],
+      ["13:15–14:15","s|柯南小镇：青山剛昌ふるさと館 + コナン通り","《名侦探柯南》作者纪念馆+沿途青铜像+由良(コナン)駅"],
+      ["dr|14:15–15:00","🚗 驾车 → 鸟取砂丘（约45分）",""],
+      ["15:00–16:45","s|鳥取砂丘","日本最大砂丘、骑骆驼/滑沙；日落约17:00日本海落日"],
+      ["晚","h|入住 東横INN鳥取駅北口（暂定）","2024/12新开·住客免费停车·北口徒步2分；晚餐海鲜丼/松叶蟹/牛骨拉面"],
+      ["【Day5 弹性缓冲，赶 15:12 はくと】","",""],
+      ["~9:00","退房，自由活动","从下面按精力/兴趣挑，不必都做"],
+      ["上午","o|机动项(任选)","鸟取城跡+天球丸巻石垣(约1.5h,含仁風閣)／柯南小镇(若没去)／砂丘补看／白兎神社"],
+      ["11:00–12:30","鸟取市区 午餐",""],
+      ["~14:00","o|视情况最后一个顺路点","白兎神社(结缘,砂丘方向顺路)等"],
+      ["~14:30","s|鳥取駅 附近还车","加满油，预留还车+走站台时间"],
+      ["15:12","🚄 スーパーはくと12号 鳥取 → 大阪","约2h35到大阪(经上郡/姫路)"],
+    ],
+    warn:"🌤 投入堂/天气弹性：①首选 Day4 上午(顺路不回头)；②Day4差·Day5好→可 Day5 一早冲(7:30出发→12:30回鸟取，缓冲很紧、要放弃其他项)；③都差/闭山→舍弃投入堂，用柯南+砂丘+鸟取城填满，反更轻松。砂丘同理，Day4傍晚看日落最佳。" },
+];
+
+const enc = encodeURIComponent;
+const box = document.getElementById("days");
+
+days.forEach(d => {
+  const embed = "https://maps.google.com/maps?saddr=" + enc(d.stops[0]) +
+      "&daddr=" + d.stops.slice(1).map(enc).join("+to:") + "&hl=ja&output=embed";
+  const dir = "https://www.google.com/maps/dir/" + d.stops.map(enc).join("/");
+
+  const rowsHtml = d.rows.map(r => {
+    let [t, act, note] = r;
+    // section-header row (no time)
+    if (act === "" && note === "" && t.startsWith("【")) {
+      return `<tr><td colspan="3" style="background:#efe7d6;color:#8a6d3b;font-weight:600;">${t}</td></tr>`;
+    }
+    let cls = "";
+    if (t.startsWith("dr|")) { cls = "dr"; t = t.slice(3); }
+    let hotel = false, sight = false, opt = false;
+    if (act.startsWith("s|")) { sight = true; act = act.slice(2); }
+    else if (act.startsWith("h|")) { hotel = true; act = act.slice(2); }
+    else if (act.startsWith("o|")) { opt = true; act = act.slice(2); }
+    if (hotel) cls += " hotelrow";
+    let actHtml = act;
+    if (sight) actHtml = `<span class="sight">${act}</span>`;
+    if (hotel) actHtml = `<span class="sight">🏨 ${act}</span>`;
+    if (opt) actHtml = `${act} <span style="color:#b08;font-size:11px;border:1px solid #d9a8c8;border-radius:8px;padding:0 5px;">optional</span>`;
+    return `<tr class="${cls}"><td class="t">${t}</td><td>${actHtml}</td><td style="color:#7a7565;">${note}</td></tr>`;
+  }).join("");
+
+  box.insertAdjacentHTML("beforeend", `
+    <section class="day" id="${d.id}">
+      <h2>Day ${d.n} <span class="tag">${d.tag}</span></h2>
+      <div class="idea">${d.idea}</div>
+      <div class="mapbox"><iframe loading="lazy" src="${embed}"></iframe></div>
+      <a class="btn-open" href="${dir}" target="_blank" rel="noopener">▶ 在 Google 地图打开这天路线（含导航）</a>
+      <table class="grid tl"><tr><th>时间</th><th>安排</th><th>备注</th></tr>${rowsHtml}</table>
+      <div class="warn">${d.warn}</div>
+    </section>
+  `);
+});
+
+// checklist persistence
+document.querySelectorAll('#checklist input').forEach(c => {
+  c.checked = localStorage.getItem('saga_' + c.id) === '1';
+  c.addEventListener('change', () => localStorage.setItem('saga_' + c.id, c.checked ? '1' : '0'));
+});
+</script>
+</body>
+</html>
