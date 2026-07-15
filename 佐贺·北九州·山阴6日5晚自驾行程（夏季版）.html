@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佐贺·北九州·山阴 6 日 5 晚自驾行程（夏季版）</title>
+<style>
+  :root{
+    color-scheme: light;
+    --paper:#F7F2E9; --paper2:#FBF8F1; --card:#FFFFFF;
+    --ink:#2C2823; --ink-soft:#5A544B; --line:#E4DACb;
+    --ai:#1F3A5F; --ai-soft:#33557E; --shu:#B34A3A;
+    --gold:#B98A34; --sea:#2E6E7E; --green:#5B7A52;
+    --shadow:0 1px 2px rgba(44,40,35,.06),0 6px 22px rgba(44,40,35,.08);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:radial-gradient(1200px 500px at 80% -100px, #EFE6D5 0%, transparent 60%),var(--paper);
+    color:var(--ink);
+    font-family:"Hiragino Sans","PingFang SC","Yu Gothic UI","Microsoft YaHei",system-ui,sans-serif;
+    line-height:1.7;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px 90px;}
+
+  header.hero{padding:56px 0 30px;border-bottom:2px solid var(--line);margin-bottom:16px;}
+  .kicker{font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:var(--shu);font-weight:700;margin:0 0 14px;}
+  h1{font-family:"Yu Mincho","Songti SC","Noto Serif JP",serif;font-size:clamp(30px,5vw,46px);line-height:1.18;margin:0 0 6px;color:var(--ai);font-weight:700;letter-spacing:.01em;}
+  .subtitle{font-size:16px;color:var(--ink-soft);margin:10px 0 22px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .pill{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:13.5px;color:var(--ink);box-shadow:var(--shadow);}
+  .pill b{color:var(--ai);font-weight:700;}
+  .pill.warn{background:#FBEEE9;border-color:#E8CFC5;color:#8f3a2c;}
+  .pill.warn b{color:#8f3a2c;}
+
+  .mapnote{background:#EAF0F7;border:1px solid #CFDDEC;border-radius:12px;padding:13px 16px;font-size:13px;color:#2b4a6b;margin:20px 0 4px;}
+  .mapnote b{color:var(--ai);}
+
+  h2.sec{font-family:"Yu Mincho","Songti SC","Noto Serif JP",serif;font-size:24px;color:var(--ai);margin:46px 0 16px;display:flex;align-items:center;gap:12px;}
+  h2.sec::before{content:"";width:9px;height:26px;background:var(--shu);border-radius:2px;display:inline-block;}
+
+  table.ov{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);font-size:14.5px;}
+  table.ov th{background:var(--ai);color:#fff;text-align:left;padding:12px 14px;font-weight:600;font-size:13.5px;}
+  table.ov td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top;}
+  table.ov tr:nth-child(even) td{background:#FCFAF5;}
+  table.ov .d{color:var(--shu);font-weight:700;white-space:nowrap;}
+  table.ov .stay{color:var(--ai);font-weight:600;}
+
+  .info{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
+  .info .box{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 18px;box-shadow:var(--shadow);}
+  .info .box h4{margin:0 0 6px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--shu);}
+  .info .box p{margin:0;font-size:14.5px;color:var(--ink);}
+  .info .box p b{color:var(--ai);}
+
+  .day{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);margin:22px 0;overflow:hidden;scroll-margin-top:16px;}
+  .day > .dhead{display:flex;align-items:flex-start;gap:16px;padding:22px 24px 18px;background:linear-gradient(180deg,#FCFAF4,#fff);border-bottom:1px solid var(--line);}
+  .daynum{flex:none;width:56px;height:56px;border-radius:14px;background:var(--ai);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:"Yu Mincho","Songti SC",serif;line-height:1;}
+  .daynum small{font-size:10px;letter-spacing:.16em;opacity:.8;margin-bottom:3px;}
+  .daynum b{font-size:24px;}
+  .dhead .t h3{margin:0 0 5px;font-size:18.5px;color:var(--ink);font-weight:700;}
+  .dhead .t .route{font-size:13.5px;color:var(--ink-soft);}
+  .dhead .t .tags{margin-top:9px;display:flex;flex-wrap:wrap;gap:6px;}
+  .tag{font-size:11.5px;padding:3px 9px;border-radius:6px;font-weight:600;}
+  .tag.stay{background:#EAF0F7;color:var(--ai);}
+  .tag.drive{background:#EFEAE1;color:var(--gold);}
+  .tag.flight{background:#F3E8EC;color:var(--shu);}
+  .tag.train{background:#E6F0EE;color:var(--sea);}
+  .tag.note{background:#EDF2E8;color:var(--green);}
+
+  .dbody{padding:6px 24px 22px;}
+
+  /* map */
+  .maproute{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-soft);margin:16px 0 8px;}
+  .maproute .pin{color:var(--shu);font-weight:700;}
+  .maproute .arr{color:var(--gold);}
+  .maproute b{color:var(--ai);}
+  .mapbox{position:relative;width:100%;height:320px;border-radius:13px;overflow:hidden;border:1px solid var(--line);background:#eee;box-shadow:var(--shadow);}
+  .mapbox iframe{width:100%;height:100%;border:0;}
+  a.btn-open{display:inline-flex;align-items:center;gap:8px;margin:10px 0 4px;padding:9px 16px;border-radius:10px;background:var(--green);color:#fff;text-decoration:none;font-size:13.5px;font-weight:600;}
+  a.btn-open:hover{background:#4a6644;}
+
+  .lead{font-size:14px;color:var(--ink-soft);margin:16px 0 12px;padding-left:14px;border-left:3px solid var(--line);}
+
+  table.tl{width:100%;border-collapse:collapse;font-size:14px;margin-top:4px;}
+  table.tl td{padding:9px 8px;border-top:1px solid #F0EADF;vertical-align:top;}
+  table.tl tr:first-child td{border-top:none;}
+  table.tl .time{white-space:nowrap;color:var(--ai);font-weight:700;font-variant-numeric:tabular-nums;width:88px;font-size:13px;}
+  table.tl .what b{color:var(--ink);}
+  table.tl .what .sub{display:block;color:var(--ink-soft);font-size:12.8px;margin-top:2px;}
+  table.tl tr.hotelrow td{background:#F3F7F1;}
+  .icon{color:var(--gold);font-weight:700;}
+
+  .callout{margin:16px 0 4px;padding:13px 16px;border-radius:11px;font-size:13.5px;background:#FBEEE9;border:1px solid #E8CFC5;color:#7c3527;}
+  .callout.sun{background:#FBF4DE;border-color:#EBDCA8;color:#7a5b16;}
+  .callout.tip{background:#E9F1EC;border-color:#C9DFCf;color:#365a41;}
+  .callout b{font-weight:700;}
+
+  .block{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;box-shadow:var(--shadow);}
+  .block h3{margin:16px 0 8px;font-size:16px;color:var(--ai);}
+  .block h3:first-child{margin-top:2px;}
+  .block ul{margin:6px 0 8px;padding-left:20px;}
+  .block li{margin:5px 0;font-size:14px;}
+  .block table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0;}
+  .block table th{background:#F1ECE1;text-align:left;padding:8px 10px;color:var(--ai);}
+  .block table td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:top;}
+
+  .check{list-style:none;padding:0;margin:0;}
+  .check li{position:relative;padding:8px 8px 8px 34px;border-bottom:1px dashed var(--line);font-size:14px;}
+  .check li::before{content:"";position:absolute;left:6px;top:12px;width:16px;height:16px;border:2px solid var(--ai-soft);border-radius:4px;}
+  .check li:last-child{border-bottom:none;}
+
+  footer{margin-top:50px;text-align:center;color:var(--ink-soft);font-size:12.5px;}
+  a.top{color:var(--ai);text-decoration:none;}
+
+  @media(max-width:560px){
+    table.tl .time{width:70px;}
+    .wrap{padding:0 14px 70px;}
+    .mapbox{height:260px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="kicker">Kyushu · San'in Road Trip — Summer</p>
+    <h1>佐贺 · 北九州 · 山阴<br>6 日 5 晚 自驾行程</h1>
+    <p class="subtitle">九州（佐贺）→ 山阴（出云 / 松江 / 蒜山 / 鸟取）→ 山阴海岸 → 天橋立，尾接关西空港晚班机回程。</p>
+    <div class="meta-row">
+      <span class="pill">🗓 <b>2026 年夏</b>（7 月底 ～ お盆前）</span>
+      <span class="pill">🌇 日落约 <b>19:00</b>·长日照</span>
+      <span class="pill">🚗 单向东进 · 持日本驾照</span>
+      <span class="pill">🛫 回程 <b>KIX 晚班机</b>（约 20:00 / 22:00）</span>
+      <span class="pill warn">⚠ 务必 <b>避开お盆 8/13–16</b></span>
+    </div>
+  </header>
+
+  <div class="mapnote">
+    🗺 <b>每天配一张 Google 路线图</b>（需联网、用浏览器打开，链接已锁定<b>日语版 hl=ja</b>）：点绿色按钮可跳转导航。路线<b>起终点锚定当天酒店</b>——例外：Day1 起点＝福冈机场（取车）、Day6 终点＝<b>关西空港 KIX</b>（当日最终目的地）。另：Day2 驾驶段止于唐津駅（还车后坐电车进博多）、Day3 自出云空港起（前段航班）；Day6 实际在舞鶴（西舞鶴駅前 トヨタ店）还车、再乘特急去 KIX，地图 舞鶴→KIX 段为示意。
+  </div>
+
+  <!-- OVERVIEW -->
+  <h2 class="sec" id="overview">行程总览</h2>
+  <table class="ov">
+    <thead><tr><th style="width:64px;">日</th><th>主要区域</th><th>住宿</th><th>交通</th></tr></thead>
+    <tbody>
+      <tr><td class="d">Day 1</td><td>福冈高达 → 吉野ヶ里 → 武雄 → 祐徳稲荷</td><td class="stay">Fairfield 佐賀嬉野温泉</td><td>春秋 9C6609（福冈机场取车）*</td></tr>
+      <tr><td class="d">Day 2</td><td>唐津城 → 鏡山 → 名護屋 → 呼子半岛</td><td class="stay">Four Points Flex 福岡博多</td><td>自驾，唐津駅前店还车 → JR筑肥線进博多</td></tr>
+      <tr><td class="d">Day 3</td><td>出云 → 松江 → 江岛大桥 → 蒜山</td><td class="stay">Fairfield 岡山蒜山高原</td><td>JAL3551 福冈07:15→出云08:25 *，出云空港取车</td></tr>
+      <tr><td class="d">Day 4</td><td>三徳山投入堂（早）→ 柯南小镇 → 鸟取砂丘（傍晚）</td><td class="stay">東横INN 鳥取駅北口（暂定）</td><td>自驾</td></tr>
+      <tr><td class="d">Day 5</td><td>鸟取弹性 → 山阴海岸（浦富/餘部/城崎日归）→ 天橋立</td><td class="stay">Fairfield 京都天橋立</td><td>延长租车、沿海岸东进</td></tr>
+      <tr><td class="d">Day 6</td><td>天橋立（股のぞき/沙洲）→ 舞鶴（简单逛·还车）→ 关西空港</td><td class="stay">— 当日回程</td><td>舞鶴还车 → 特急约 3h 到 KIX → 晚班机</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px;color:var(--ink-soft);margin-top:8px;">* 航班时刻沿用旧版示意，<b>夏季日期需重新订票</b>；旺季（お盆前）票价偏高，尽早订。</p>
+
+  <!-- BASIC INFO -->
+  <h2 class="sec">基本信息</h2>
+  <div class="info">
+    <div class="box"><h4>去程</h4><p>春秋 9C6609　上海浦东 PVG 07:45 → 福冈 FUK 10:55（<b>夏季重订</b>）</p></div>
+    <div class="box"><h4>回程</h4><p>关西空港 KIX <b>晚班机（约 20:00 / 22:00）</b>——正因是晚班机，天橋立收尾才来得及</p></div>
+    <div class="box"><h4>九州段租车</h4><p>福冈机场取 → <b>唐津駅前店还</b>（トヨタ，同公司异地）→ 换 JR筑肥線进博多</p></div>
+    <div class="box"><h4>山阴段租车</h4><p>出雲縁結び空港取 → <b>トヨタ舞鶴店（西舞鶴駅前）还</b>，已确认可单程还车（ワンウェイ◎）、营业 9:00–18:00；Day6 逛完舞鶴还车、乘特急まいづる经京都去 KIX</p></div>
+    <div class="box"><h4>唐津 → 博多</h4><p>JR筑肥線 约 70–80 分、¥1,140 左右，多直通福冈地铁空港線</p></div>
+    <div class="box"><h4>驾照</h4><p>✅ 持日本驾照，直接可租可开</p></div>
+  </div>
+
+  <div class="callout sun" style="margin-top:18px;">
+    ☀️ <b>夏季版核心变化：</b>① 日落约 19:00，<b>长日照解封</b>——武雄大楠白天可看、佐贺段整体不赶；② 酷暑应对：<b>投入堂排一早、砂丘排傍晚</b>；③ 无雪胎/闭山顾虑，改为防暑 + 防午后雷阵雨 + 台风季机动；④ 尾部由「はくと→大阪」改为 <b>山阴海岸 → 天橋立</b> 收尾，净加 1 晚。
+  </div>
+
+  <!-- DAYS -->
+  <h2 class="sec">逐日行程</h2>
+
+  <!-- DAY 1 -->
+  <div class="day" id="d1">
+    <div class="dhead">
+      <div class="daynum"><small>DAY</small><b>1</b></div>
+      <div class="t">
+        <h3>福冈机场 → 高达 → 吉野ヶ里 → 武雄 → 祐徳稲荷 → 嬉野温泉</h3>
+        <div class="route">抵达日 · 由近及远向西南 · 无长途（最长单段约 50 分）</div>
+        <div class="tags"><span class="tag flight">✈ 春秋 9C6609</span><span class="tag drive">🚗 约 2h55</span><span class="tag stay">🏨 嬉野 Fairfield</span></div>
+      </div>
+    </div>
+    <div class="dbody">
+      <p class="lead">抵达日走轻松路线，高达就在机场旁先看，再顺势 吉野ヶ里 → 武雄 → 祐徳。夏季日照长，全程从容，傍晚祐徳还能赶上夜间点灯。</p>
+      <table class="tl">
+        <tr><td class="time">10:55</td><td class="what"><b>抵达福冈机场国际线</b><span class="sub">入境高峰排队，预留 1–1.5h</span></td></tr>
+        <tr><td class="time">~12:15</td><td class="what"><b>机场取车</b><span class="sub">预约トヨタ门店（Day2 唐津駅前店还）；确认 ETC 卡</span></td></tr>
+        <tr><td class="time">12:15</td><td class="what"><span class="icon">🚗</span> → ららぽーと福岡<span class="sub">约 15 分（机场旁）</span></td></tr>
+        <tr><td class="time">12:30</td><td class="what"><b>ららぽーと福岡</b>：实物大 RX-93ff ν 高达 + 午餐<span class="sub">白天有定时演出，先查当日时刻；美食广场午餐、逛街买手办</span></td></tr>
+        <tr><td class="time">14:00</td><td class="what"><span class="icon">🚗</span> → 吉野ヶ里<span class="sub">九州道，约 50 分</span></td></tr>
+        <tr><td class="time">14:50</td><td class="what"><b>吉野ヶ里歴史公園</b><span class="sub">弥生环壕集落遗迹，门票 ¥460；主线约 1.5h；17:00 闭园</span></td></tr>
+        <tr><td class="time">16:20</td><td class="what"><span class="icon">🚗</span> → 武雄<span class="sub">长崎道，约 50 分</span></td></tr>
+        <tr><td class="time">17:10</td><td class="what"><b>武雄温泉 楼門 + 武雄神社</b><span class="sub">楼門为辰野金吾设计（东京站同款血统）；夏季天还亮，<b>「3000 年大楠」白天可好好看</b></span></td></tr>
+        <tr><td class="time">18:00</td><td class="what"><span class="icon">🚗</span> → 祐徳稲荷神社<span class="sub">约 30 分</span></td></tr>
+        <tr><td class="time">18:30</td><td class="what"><b>祐徳稲荷神社</b><span class="sub">日本三大稲荷之一，悬空本殿 + 千本鸟居；傍晚/夜间点灯氛围佳；有电梯 ¥300</span></td></tr>
+        <tr class="hotelrow"><td class="time">19:10</td><td class="what"><b>🏨 入住 Fairfield 佐賀嬉野温泉</b><span class="sub">约 30 分车程；晚餐温泉汤豆腐是名物</span></td></tr>
+      </table>
+      <div class="callout sun">🌇 <b>夏季红利：</b>深秋版里天黑看不清的武雄大楠，这次白天就能看；祐徳到得晚也不亏，正好赶夜间点灯。</div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day" id="d2">
+    <div class="dhead">
+      <div class="daynum"><small>DAY</small><b>2</b></div>
+      <div class="t">
+        <h3>嬉野 → 唐津城 → 鏡山 → 名護屋 → 呼子 →（唐津駅还车）筑肥線进博多</h3>
+        <div class="route">上午北上攻唐津半岛 · 末站呼子后就近还车、坐电车进博多</div>
+        <div class="tags"><span class="tag drive">🚗 约 2h50（无市区堵车）</span><span class="tag train">🚄 筑肥線进博多</span><span class="tag stay">🏨 博多 Four Points</span></div>
+      </div>
+    </div>
+    <div class="dbody">
+      <p class="lead">由近及远：唐津城 → 鏡山 → 名護屋 → 最远的呼子。末站玩完就近到唐津駅还车，换 JR 轻松进博多，省掉呼子→博多约 90 分市区驾驶，当晚早休息，好赶 Day3 的 07:15 早班机。</p>
+      <table class="tl">
+        <tr class="hotelrow"><td class="time">~8:30</td><td class="what"><b>🏨 Fairfield 嬉野 早餐后退房出发</b></td></tr>
+        <tr><td class="time">8:30</td><td class="what"><span class="icon">🚗</span> → 唐津城<span class="sub">约 60 分</span></td></tr>
+        <tr><td class="time">9:30</td><td class="what"><b>唐津城</b>（外观为主）<span class="sub">从舞鶴橋拍天守 + 海景；夏季蓝天海景更好</span></td></tr>
+        <tr><td class="time">10:10</td><td class="what"><span class="icon">🚗</span> → 鏡山展望台<span class="sub">约 20 分（盘山路）</span></td></tr>
+        <tr><td class="time">10:30</td><td class="what"><b>鏡山展望台</b><span class="sub">俯瞰虹の松原与唐津湾全景</span></td></tr>
+        <tr><td class="time">11:00</td><td class="what"><span class="icon">🚗</span> → 名護屋城<span class="sub">约 45 分</span></td></tr>
+        <tr><td class="time">11:45</td><td class="what"><b>名護屋城跡 + 博物館</b><span class="sub">丰臣秀吉侵朝大本营；博物馆免费、<b>周一休馆</b></span></td></tr>
+        <tr><td class="time">13:00</td><td class="what"><span class="icon">🚗</span> → 呼子（加部島）<span class="sub">约 15 分</span></td></tr>
+        <tr><td class="time">13:15</td><td class="what"><b>呼子午餐 + 田島神社 磯鳥居</b><span class="sub">海边鸟居；午餐尝呼子活鱿鱼（名店排队）</span></td></tr>
+        <tr><td class="time">14:30</td><td class="what"><span class="icon">🚗</span> → 唐津駅<span class="sub">约 30 分；途中加满油</span></td></tr>
+        <tr><td class="time">15:00</td><td class="what"><b>トヨタ 唐津駅前店 还车</b><span class="sub">核对异地还车手续（自驾段到此为止）</span></td></tr>
+        <tr><td class="time">15:30</td><td class="what"><span class="icon">🚄</span> <b>JR筑肥線 唐津 → 博多</b><span class="sub">约 70–80 分、¥1,140 左右，按当日时刻核对</span></td></tr>
+        <tr class="hotelrow"><td class="time">傍晚</td><td class="what"><b>🏨 入住 Four Points Flex 福岡博多</b><span class="sub">博多站附近步行可达；晚餐博多拉面/屋台；<b>早休，明早 07:15 航班</b></span></td></tr>
+      </table>
+      <div class="callout tip">🗺 地图为自驾段（嬉野酒店→唐津駅还车）；博多酒店由电车抵达，未画入路线。大川内山本次仍略过（窑元店铺约 17:00 关）。</div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day" id="d3">
+    <div class="dhead">
+      <div class="daynum"><small>DAY</small><b>3</b></div>
+      <div class="t">
+        <h3>福冈 ✈ 出云 → 松江 → 江岛大桥 → 蒜山高原</h3>
+        <div class="route">清早飞出云，落地即租车，沿山阴一路向东，傍晚上高原</div>
+        <div class="tags"><span class="tag flight">✈ JAL3551</span><span class="tag drive">🚗 约 2.5h</span><span class="tag stay">🏨 蒜山高原（凉爽）</span></div>
+      </div>
+    </div>
+    <div class="dbody">
+      <p class="lead">从最西的出云开始，出云大社 → 松江城 → 江岛大桥，傍晚上蒜山入住。蒜山高原海拔约 500m，是夏季难得的避暑亮点。</p>
+      <table class="tl">
+        <tr><td class="time">07:15</td><td class="what"><b>JAL 3551 福岡 → 出雲</b>（08:25 到）<span class="sub">需提前退房赶早机（博多→福冈机场地铁约 6 分）</span></td></tr>
+        <tr><td class="time">08:50</td><td class="what"><b>出雲縁結び空港 取车</b><span class="sub">确认单程还车（天橋立/关空）手续 + ETC（自驾段自此起）</span></td></tr>
+        <tr><td class="time">09:10</td><td class="what"><b>稲佐の浜</b><span class="sub">弁天島鸟居、「国譲り」神话之滨；上午人少清净</span></td></tr>
+        <tr><td class="time">09:40</td><td class="what"><b>出雲大社</b><span class="sub">日本第一结缘神社，神楽殿大注连绳必看；门前ぜんざい发祥、出雲そば</span></td></tr>
+        <tr><td class="time">11:15</td><td class="what"><span class="icon">🚗</span> → 松江<span class="sub">山阴道，约 45–50 分</span></td></tr>
+        <tr><td class="time">12:05</td><td class="what"><b>松江 午餐（出雲そば）</b></td></tr>
+        <tr><td class="time">13:00</td><td class="what"><b>松江城</b><span class="sub">现存 12 天守之一（国宝黑天守）；有余可加堀川游船（绕城 50 分）</span></td></tr>
+        <tr><td class="time">14:15</td><td class="what"><span class="icon">🚗</span> → 江島大橋<span class="sub">约 30 分</span></td></tr>
+        <tr><td class="time">14:45</td><td class="what"><b>江島大橋（ベタ踏み坂）</b><span class="sub">网红陡桥，从大根島/境港侧仰拍最陡</span></td></tr>
+        <tr class="hotelrow"><td class="time">15:15</td><td class="what"><b>🏨 → Fairfield 岡山蒜山高原 入住</b><span class="sub">米子道，约 1h15；ジャージーランド 娟姗牛乳制品；高原夏夜凉爽星多，晚餐蒜山焼きそば</span></td></tr>
+      </table>
+      <div class="callout tip">💡 想在出云添一个足立美術館（安来，日本第一庭园）需在中段多加一晚——本次为「只加 1 晚」已放弃，留作日后升级项。</div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day" id="d4">
+    <div class="dhead">
+      <div class="daynum"><small>DAY</small><b>4</b></div>
+      <div class="t">
+        <h3>蒜山 → 三徳山投入堂（一早）→ 柯南小镇 → 鸟取砂丘（傍晚）</h3>
+        <div class="route">避暑关键日：硬核项目排早晨、砂丘留傍晚</div>
+        <div class="tags"><span class="tag drive">🚗 约 2.5h</span><span class="tag note">🥾 投入堂需 2 人以上</span><span class="tag stay">🏨 鸟取駅北口</span></div>
+      </div>
+    </div>
+    <div class="dbody">
+      <p class="lead">夏季这天的排法专为避暑：投入堂是手脚并用的攀爬，趁清晨凉爽且午后易雷阵雨前完成；砂丘则放到傍晚，避开正午烫脚沙面，还能看日本海落日。</p>
+      <table class="tl">
+        <tr class="hotelrow"><td class="time">~7:30</td><td class="what"><b>🏨 Fairfield 蒜山 早退房，向东出发</b><span class="sub">三山晨景 / ジャージーランド买乳制品当早餐</span></td></tr>
+        <tr><td class="time">9:00</td><td class="what"><b>三徳山三佛寺 投入堂 登山参拝</b><span class="sub">⚠️ <b>单人不可入山</b>（需 2 人以上结伴）；需登山鞋、受付发白襷；往返 1.5–2h，陡峭手脚并用。<b>趁早晨凉、避午后雷雨</b></span></td></tr>
+        <tr><td class="time">11:15</td><td class="what"><b>三朝温泉 午餐 + 足汤</b><span class="sub">含氡放射能温泉，河畔免费足汤/河原风吕，登完泡脚正好</span></td></tr>
+        <tr><td class="time">13:15</td><td class="what"><b>柯南小镇（北栄町）</b><span class="sub">青山剛昌ふるさと館 + コナン通り青铜像 + 由良駅（コナン駅）；约 40 分顺路</span></td></tr>
+        <tr><td class="time">16:30</td><td class="what"><b>鳥取砂丘</b><span class="sub">日本最大砂丘、骑骆驼/滑沙；<b>傍晚避烫沙</b>，看日本海落日（砂の美術館可跳过）</span></td></tr>
+        <tr class="hotelrow"><td class="time">晚</td><td class="what"><b>🏨 入住 東横INN 鳥取駅北口（暂定）</b><span class="sub">住客免费停车、鳥取駅北口徒步 2 分；晚餐海鲜丼/鸟取牛骨拉面（夏季无松叶蟹）</span></td></tr>
+      </table>
+      <div class="callout">🥵 <b>防暑提示：</b>投入堂 + 砂丘都在户外，随身大量补水、防晒、透气登山鞋；午后山区易雷阵雨，投入堂务必上午完成。若遇大雨投入堂临时关闭，改用柯南 + 砂丘 + 鸟取城把这天填满。</div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day" id="d5">
+    <div class="dhead">
+      <div class="daynum"><small>DAY</small><b>5</b></div>
+      <div class="t">
+        <h3>鸟取弹性 → 山阴海岸（浦富 / 餘部 / 城崎日归）→ 天橋立</h3>
+        <div class="route">唯一新增的一晚 · 延长租车、沿山阴海岸东进</div>
+        <div class="tags"><span class="tag drive">🚗 约 2.5h + 停留</span><span class="tag note">🌊 山阴海岸ジオパーク</span><span class="tag stay">🏨 Fairfield 京都天橋立</span></div>
+      </div>
+    </div>
+    <div class="dbody">
+      <p class="lead">前 4 晚原样不动，这里净加 1 晚。不坐はくと回大阪，改成沿风景绝佳的山阴海岸一路向东，傍晚抵达日本三景之一的天橋立过夜。城崎温泉只当路上午餐/日归泡汤，不过夜。</p>
+      <table class="tl">
+        <tr class="hotelrow"><td class="time">~9:00</td><td class="what"><b>🏨 東横INN 鳥取 退房；上午弹性</b><span class="sub">任选：鸟取城跡+天球丸巻石垣 / 砂丘补看（白兎神社在西侧、反方向，不顺路故略）</span></td></tr>
+        <tr><td class="time">~10:30</td><td class="what"><span class="icon">🚗</span> → 浦富海岸<span class="sub">约 20 分，山阴海岸ジオパーク；可乘遊覧船/玻璃船看奇岩海蚀</span></td></tr>
+        <tr><td class="time">~12:30</td><td class="what"><b>餘部鉄橋「空の駅」</b><span class="sub">高耸红色铁桥遗构 + 展望电梯；约 1h 车程，途中</span></td></tr>
+        <tr><td class="time">~13:30</td><td class="what"><b>城崎温泉（午餐 / 日归泡汤，不过夜）</b><span class="sub">柳荫河畔外湯町，浴衣散步；夏季无螃蟹但氛围佳</span></td></tr>
+        <tr class="hotelrow"><td class="time">~16:00</td><td class="what"><b>🏨 → Fairfield 京都天橋立 入住</b><span class="sub">约 1–1.5h；宮津市，离天橋立沙洲几公里、开车几分钟；海鲜晚餐</span></td></tr>
+      </table>
+      <div class="callout tip">🚙 <b>租车调整：</b>山阴段由「出雲取／鳥取还」改为「出雲取／<b>トヨタ舞鶴店（西舞鶴駅前）还</b>」——已确认可单程还车、营业 9:00–18:00；Day6 逛完舞鶴还车、乘特急まいづる经京都去 KIX。</div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day" id="d6">
+    <div class="dhead">
+      <div class="daynum"><small>DAY</small><b>6</b></div>
+      <div class="t">
+        <h3>天橋立 → 舞鶴（还车·简单逛）→ 关西空港（KIX）晚班机回程</h3>
+        <div class="route">日本三景收尾 · 舞鶴还车 · 转乘赶晚班机</div>
+        <div class="tags"><span class="tag note">⛩ 股のぞき / 沙洲</span><span class="tag note">⚓ 舞鶴赤れんが</span><span class="tag flight">✈ KIX 晚 20:00 / 22:00</span></div>
+      </div>
+    </div>
+    <div class="dbody">
+      <p class="lead">上午用天橋立收尾（股のぞき、松林沙洲），中午驱车到舞鶴简单逛、赤れんがパーク一带还车，再转乘赴 KIX。因是晚班机，即使舞鶴→关空约 3h 也从容。</p>
+      <table class="tl">
+        <tr class="hotelrow"><td class="time">~8:30</td><td class="what"><b>🏨 Fairfield 京都天橋立 退房</b> → <b>天橋立ビューランド（飛龍観）</b> 或 傘松公園（股のぞき）<span class="sub">缆车/吊椅上山，经典俯瞰角度</span></td></tr>
+        <tr><td class="time">~10:00</td><td class="what"><b>沙洲漫步 / 租自行车横穿</b> + 智恩寺（文殊堂）<span class="sub">3.6km 白砂青松（想看伊根舟屋则往北 30 分，与舞鶴二选一）</span></td></tr>
+        <tr><td class="time">~11:20</td><td class="what"><span class="icon">🚗</span> → 舞鶴<span class="sub">天橋立→舞鶴约 40 分（舞鶴若狭道/国道）</span></td></tr>
+        <tr><td class="time">~12:00</td><td class="what"><b>舞鶴 简单逛 + 午餐</b><span class="sub">赤れんがパーク红砖仓库群 / 军港游览船 / 五老スカイタワー俯瞰里亚斯海岸</span></td></tr>
+        <tr><td class="time">~14:00</td><td class="what"><b>トヨタレンタカー 舞鶴店 还车（JR西舞鶴駅前）</b><span class="sub">加满油；营业 9:00–18:00（务必 18:00 前还）·ワンウェイ还车OK·ETC出借·TEL 0773-75-8100·マップコード 174669596*56</span></td></tr>
+        <tr><td class="time">~14:30</td><td class="what"><span class="icon">🚄</span> <b>西舞鶴駅 → 京都 → 关西空港</b><span class="sub">特急まいづる 到京都约 1.5h → はるか 到关空约 1.3h，含换乘约 3h</span></td></tr>
+        <tr><td class="time">~18:00 前</td><td class="what"><b>抵达关西空港，办登机</b><span class="sub">国际线提前 2–3h；晚 20:00 / 22:00 航班</span></td></tr>
+      </table>
+      <div class="callout sun">⏱ <b>时间账：</b>晚班机是天橋立方案成立的前提。若哪天改成上午航班，天橋立赶不回来，应改回大阪/近场收尾——记得同步核对。</div>
+    </div>
+  </div>
+
+  <!-- SUMMER NOTES -->
+  <h2 class="sec">夏季注意 · 驾驶 · 路况</h2>
+  <div class="block">
+    <h3>🥵 酷暑 &amp; 天气机动</h3>
+    <ul>
+      <li><b>防暑第一：</b>7–8 月九州/山阴常 33–36℃、高湿。投入堂、砂丘、各神社城迹都在户外，随身补水、防晒、遮阳、透气鞋，正午尽量安排室内/车内。</li>
+      <li><b>午后雷阵雨：</b>山区（三徳山、蒜山、大山周边）午后易骤雨雷电，登山类务必上午完成。</li>
+      <li><b>台风季：</b>8 月起可能有台风影响九州/山阴/近畿，出发前和每日查天气；行程末端天橋立→KIX 若遇台风，预留改乘/提前撤的弹性。</li>
+      <li><b>お盆（8/13–16）：</b>全日本大迁徙，住宿/交通爆满且涨价。<b>务必排在 8/13 之前</b>，天橋立、城崎、出云大社等热门点更要尽早订房。</li>
+    </ul>
+    <h3>🚦 沿途高速限速（以现场路牌为准，乘用车）</h3>
+    <table>
+      <tr><th>路线</th><th>大致限速</th><th>备注</th></tr>
+      <tr><td>福岡都市高速</td><td>60–80</td><td>进出福冈市区</td></tr>
+      <tr><td>九州道 / 長崎道</td><td>100</td><td>主干高速</td></tr>
+      <tr><td>山陰自動車道（出云〜松江〜米子）</td><td>多 70</td><td>⚠️ 多为暫定 2 車線·对面通行，严禁越线超车</td></tr>
+      <tr><td>米子自動車道（米子〜蒜山〜落合）</td><td>80</td><td>翻山、弯道多</td></tr>
+      <tr><td>鳥取自動車道 / 山陰近畿方面</td><td>70–80</td><td>亦有对面通行段</td></tr>
+    </table>
+    <div class="callout" style="margin-top:6px;">🛣 <b>山阴自驾最大风险不是天气，是「暫定 2 車線」对面通行：</b>大量免费高速看着像高速、实为双向单车道，仅靠中央软柱/标线分隔。<b>务必按限速、勿超车、警惕对向车与前车突然减速</b>——这是山阴自驾最常见的事故因素。</div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <h2 class="sec">行前清单</h2>
+  <div class="block">
+    <ul class="check">
+      <li><b>夏季日期先避开お盆（8/13–16）</b>，机票 + 全程住宿尽早订（旺季涨价快）</li>
+      <li>两段租车分别预订：①九州段 福冈机场取 / 唐津駅前店还（トヨタ）；②山阴段 出雲空港取 / <b>トヨタ舞鶴店（西舞鶴駅前）还</b>（ワンウェイ已确认可，营业 9:00–18:00，务必 18:00 前还）；单程 drop fee 待询；均加订 ETC + 中文导航</li>
+      <li>去/回程航班重订：去程 9C6609 示意，回程锁定 <b>KIX 晚班机（20:00 / 22:00）</b>并据此定 Day6 节奏</li>
+      <li>JR筑肥線 唐津→博多 当日时刻/末班核对</li>
+      <li>ららぽーと高达当日定时演出时间表（官网）</li>
+      <li><b>名護屋城博物館周一休馆</b> → 核对 Day2 是否落在周一</li>
+      <li>三徳山投入堂：<b>需 2 人以上结伴</b> + 登山鞋；查当日天气（午后雷雨则提早）</li>
+      <li>青山剛昌ふるさと館营业时间/休馆日（约 9:30–17:30）</li>
+      <li>天橋立：ビューランド/傘松公園缆车运营时间；<b>Fairfield 京都天橋立</b>订房</li>
+      <li>舞鶴：<b>トヨタ舞鶴店</b>（TEL 0773-75-8100·マップコード 174669596*56·18:00 前还车）；赤れんがパーク & 军港游览船时间；<b>特急まいづる</b>（西舞鶴发）当日班次 + 末班核对，倒推动身时间</li>
+      <li>舞鶴 → KIX 转乘试算：特急まいづる→京都→はるか 约 3h（含换乘），据晚班机时刻倒推动身时间</li>
+      <li>嬉野 Fairfield 温泉设施以预订页为准；导航用电话番号或 Mapcode 更准</li>
+    </ul>
+  </div>
+
+  <!-- DRIVING SUMMARY -->
+  <h2 class="sec">全程驾驶量参考</h2>
+  <div class="info">
+    <div class="box"><h4>Day 1 · 九州</h4><p>约 130 km / 累计约 <b>2h55</b>（无长途，最长单段约 50 分）</p></div>
+    <div class="box"><h4>Day 2 · 九州</h4><p>约 130 km / 累计约 <b>2h50</b>（末段还车换电车，免市区驾驶）</p></div>
+    <div class="box"><h4>Day 3 · 山阴</h4><p>约 130 km / 累计约 <b>2.5h</b>（出云→松江→江岛→蒜山）</p></div>
+    <div class="box"><h4>Day 4 · 山阴</h4><p>约 120 km / 累计约 <b>2.5h</b>（蒜山→三徳山→柯南→砂丘）</p></div>
+    <div class="box"><h4>Day 5 · 海岸</h4><p>约 130–150 km / 累计约 <b>2.5h + 停留</b>（鸟取→浦富→餘部→城崎→天橋立）</p></div>
+    <div class="box"><h4>Day 6 · 回程</h4><p>天橋立 → 舞鶴 自驾约 <b>40 分</b>；舞鶴还车 → KIX 特急约 <b>3h</b></p></div>
+  </div>
+
+  <footer>
+    佐贺·北九州·山阴 6 日 5 晚自驾行程（夏季版）· 2026 夏（お盆前）· 单向东进，天橋立收尾赴 KIX 晚班机<br>
+    <a class="top" href="#">↑ 回到顶部</a>
+  </footer>
+
+</div>
+
+<script>
+  // 每天路线：起点/终点均为当天酒店；仅 Day1 起点=福冈机场、Day6 终点=トヨタ舞鶴店(还车点) 例外。
+  // Day2 自驾止于唐津駅（还车→电车进博多）；Day3 自驾自出云空港起（前段航班）；Day6 舞鶴还车后乘特急去KIX。
+  const dayStops = {
+    d1: ["福岡空港","33.5649,130.4402","吉野ヶ里歴史公園","武雄神社","祐徳稲荷神社","フェアフィールド・バイ・マリオット・佐賀嬉野温泉"],  /* [1]坐标=ららぽーと福岡(名称Google定位不到) */
+    d2: ["フェアフィールド・バイ・マリオット・佐賀嬉野温泉","唐津城","鏡山展望台 唐津","名護屋城跡","田島神社 唐津市呼子","唐津駅"],
+    d3: ["出雲縁結び空港","稲佐の浜","出雲大社","松江城","江島大橋","フェアフィールド・バイ・マリオット・岡山蒜山高原"],
+    d4: ["フェアフィールド・バイ・マリオット・岡山蒜山高原","三徳山三佛寺","三朝温泉","青山剛昌ふるさと館","鳥取砂丘","東横イン鳥取駅北口"],
+    d5: ["東横イン鳥取駅北口","35.5990,134.3020","余部橋梁","城崎温泉","フェアフィールド・バイ・マリオット・京都天橋立"],  /* [1]坐标=浦富海岸(名称Google定位不到) */
+    d6: ["フェアフィールド・バイ・マリオット・京都天橋立","天橋立ビューランド","舞鶴赤れんがパーク","関西国際空港"],  /* 终点KIX;舞鶴为中途还车(トヨタ西舞鶴駅前店)+游览 */
+  };
+  const shortName = s => s
+    .replace("フェアフィールド・バイ・マリオット・","Fairfield ")
+    .replace("トヨタレンタカー","トヨタ ")
+    .replace("関西国際空港","関西空港KIX")
+    .replace("東横イン","東横INN")
+    .replace("縁結び空港","空港")
+    .replace(" 唐津","").replace(" 唐津市呼子","").replace(" 宮津","");
+  const enc = encodeURIComponent;
+
+  Object.entries(dayStops).forEach(([id, stops]) => {
+    const card = document.getElementById(id);
+    if (!card) return;
+    const body = card.querySelector(".dbody");
+    const lead = body.querySelector(".lead");
+
+    const embed = "https://maps.google.com/maps?saddr=" + enc(stops[0]) +
+      "&daddr=" + stops.slice(1).map(enc).join("+to:") + "&hl=ja&z=9&output=embed";
+    const dir = "https://www.google.com/maps/dir/" + stops.map(enc).join("/") + "/?hl=ja&gl=jp";
+
+    const routeTxt = `<span class="pin">📍</span> 起 <b>${shortName(stops[0])}</b>` +
+      ` <span class="arr">→ … →</span> ` +
+      `<span class="pin">🏁</span> 终 <b>${shortName(stops[stops.length-1])}</b>`;
+
+    const html =
+      `<div class="maproute">${routeTxt}</div>` +
+      `<div class="mapbox"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="${embed}"></iframe></div>` +
+      `<a class="btn-open" href="${dir}" target="_blank" rel="noopener">▶ 在 Google 地图打开这天路线（含导航）</a>`;
+
+    lead.insertAdjacentHTML("beforebegin", html);
+  });
+</script>
+</body>
+</html>
